@@ -30,7 +30,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
         <p className="text-sm text-gray-400">{date}</p>
       </div>
       <div className="w-20 flex justify-center">
-        <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center relative z-10">
+        <div className="w-12 h-12 rounded-full bg-sky-500 flex items-center justify-center relative z-10">
           {icon === "work" ? (
             <FaBriefcase className="text-2xl text-white" />
           ) : (
@@ -50,13 +50,13 @@ const Timeline: React.FC<{ title: string; items: TimelineItemProps[] }> = ({
   title,
   items,
 }) => (
-  <div className="mb-16">
-    <h3 className="text-2xl font-bold mb-8 text-center">{title}</h3>
+  <div className="mb-20">
+    <h3 className="text-4xl font-bold mb-12 text-center">{title}</h3>
     <div className="relative">
       {items.map((item, index) => (
         <TimelineItem key={index} {...item} />
       ))}
-      <div className="absolute h-full w-0.5 bg-blue-500 left-1/2 transform -translate-x-1/2 top-0 z-0" />
+      <div className="absolute h-full w-0.5 bg-sky-500 left-1/2 transform -translate-x-1/2 top-0 z-0" />
     </div>
   </div>
 );
@@ -117,31 +117,20 @@ const Experience: React.FC = () => {
   ];
 
   const ref1 = React.useRef(null);
-  const ref2 = React.useRef(null);
   const isInView1 = useInView(ref1, { once: true, amount: 0.3 });
-  const isInView2 = useInView(ref2, { once: true, amount: 0.3 });
 
   return (
     <section className="relative bg-gray-900 text-white py-40 overflow-hidden w-full">
-      <div className="mx-auto px-20 relative z-10">
+      <div className="container mx-auto px-20 relative z-10">
         <motion.h3
           ref={ref1}
-          className="text-xl font-bold uppercase mb-4 text-blue-300 text-center"
+          className="text-xl font-bold uppercase text-sky-300 text-center mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView1 ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           Resume
         </motion.h3>
-        <motion.h2
-          ref={ref2}
-          className="text-4xl font-bold mb-20 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView2 ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          My Credentials
-        </motion.h2>
         <Timeline title="Work Experience" items={workExperiences} />
         <Timeline title="Education" items={educationExperiences} />
       </div>
