@@ -4,12 +4,23 @@ import { motion, useInView } from "framer-motion";
 const About = () => {
   const ref1 = React.useRef(null);
   const ref2 = React.useRef(null);
+  const ref3 = React.useRef(null);
   const isInView1 = useInView(ref1, { once: true, amount: 0.3 });
   const isInView2 = useInView(ref2, { once: true, amount: 0.3 });
+  const isInView3 = useInView(ref2, { once: true, amount: 0.3 });
 
   return (
-    <section className="relative bg-gray-900 text-white py-20 flex items-center justify-center overflow-hidden w-full">
+    <section className="relative bg-slate-800 text-white py-20 flex items-center justify-center overflow-hidden w-full">
       <div className="relative z-10 text-center mx-auto px-20">
+        <motion.h3
+          ref={ref3}
+          className="text-xl font-bold uppercase mb-4 text-blue-300"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView3 ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          About Me
+        </motion.h3>
         <motion.h2
           ref={ref1}
           className="text-4xl font-bold mb-6"
@@ -17,11 +28,11 @@ const About = () => {
           animate={isInView1 ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          About Me
+          Let me introduce myself
         </motion.h2>
         <motion.p
           ref={ref2}
-          className="text-lg leading-relaxed"
+          className="text-normal leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView2 ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
@@ -35,9 +46,6 @@ const About = () => {
           challenging projects that push the boundaries of what's possible in
           web development.
         </motion.p>
-      </div>
-      <div className="absolute z-0 flex items-center justify-center">
-        <div className="absolute h-[300px] w-full before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-900 after:via-[#0141ff] after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]"></div>
       </div>
     </section>
   );

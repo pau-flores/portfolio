@@ -75,11 +75,14 @@ const Skills: React.FC = () => {
   };
 
   return (
-    <section className="relative bg-slate-800 text-white py-40 overflow-hidden w-full">
-      <div className="mx-auto px-20 relative z-10">
+    <section
+      id="skills"
+      className="relative bg-slate-800 text-white py-40 overflow-hidden w-full"
+    >
+      <div className="container mx-auto px-20 relative z-10">
         <motion.h3
           ref={ref3}
-          className="text-xl font-bold uppercase mb-4 text-blue-300 text-center"
+          className="text-xl font-bold uppercase mb-4 text-sky-300 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView3 ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
