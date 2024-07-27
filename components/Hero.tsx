@@ -10,10 +10,14 @@ const Hero = () => {
   const isInView2 = useInView(ref2, { once: true, amount: 0.3 });
   const isInView3 = useInView(ref2, { once: true, amount: 0.3 });
   const isInView4 = useInView(ref2, { once: true, amount: 0.3 });
+
   const scrollToAbout = () => {
-    document.getElementById("skills").scrollIntoView({
-      behavior: "smooth",
-    });
+    const element = document.getElementById("skills");
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
   };
 
   return (
