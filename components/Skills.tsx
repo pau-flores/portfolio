@@ -47,8 +47,14 @@ const Skills: React.FC = () => {
     { icon: SiCplusplus, name: "C++" },
   ];
 
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const ref1 = React.useRef(null);
+  const ref2 = React.useRef(null);
+  const ref3 = React.useRef(null);
+  const ref4 = React.useRef(null);
+  const isInView1 = useInView(ref1, { once: true, amount: 0.3 });
+  const isInView2 = useInView(ref2, { once: true, amount: 0.3 });
+  const isInView3 = useInView(ref2, { once: true, amount: 0.3 });
+  const isInView4 = useInView(ref2, { once: true, amount: 0.3 });
 
   const containerVariants = {
     hidden: { opacity: 0, scale: 0.8 },
@@ -69,15 +75,46 @@ const Skills: React.FC = () => {
   };
 
   return (
-    <section className="relative bg-gray-900 text-white py-20 overflow-hidden w-full">
+    <section className="relative bg-slate-800 text-white py-40 overflow-hidden w-full">
       <div className="mx-auto px-20 relative z-10">
-        <h2 className="text-4xl font-bold mb-12 text-center">My Skills</h2>
+        <motion.h3
+          ref={ref3}
+          className="text-xl font-bold uppercase mb-4 text-blue-300 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView3 ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          About Me
+        </motion.h3>
+        <motion.h2
+          ref={ref2}
+          className="text-4xl font-bold mb-6 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView2 ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          Personal Objective & Skills
+        </motion.h2>
+        <motion.p
+          ref={ref4}
+          className="text-normal leading-relaxed text-center mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView4 ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        >
+          I'm a passionate Software Engineer with years of freelancing
+          experience, creating responsive websites and web apps for small and
+          medium businesses. My tech-stack includes frameworks like Laravel for
+          backend development, and React for smooth, user-friendly experiences.
+          I have a strong interest in AI and I'm always seeking to grow my
+          skills and learn new technologies.
+        </motion.p>
         <motion.div
-          ref={ref}
-          className="grid grid-cols-2 md:grid-cols-6 gap-8"
+          ref={ref1}
+          className="grid grid-cols-3 md:grid-cols-6 gap-8"
           variants={containerVariants}
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          animate={isInView1 ? "visible" : "hidden"}
         >
           {skills.map((skill, index) => (
             <motion.div key={index} variants={itemVariants}>
@@ -85,10 +122,6 @@ const Skills: React.FC = () => {
             </motion.div>
           ))}
         </motion.div>
-      </div>
-
-      <div className="absolute inset-0 z-0 flex items-center justify-center">
-        <div className="absolute h-[500px] w-full before:absolute before:h-[500px] before:w-full before:rounded-full before:bg-gradient-radial before:from-blue-600 before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:bg-gradient-conic after:from-sky-900 after:via-blue-800 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:opacity-40 sm:before:w-[780px] sm:after:w-[340px] before:lg:h-[560px]"></div>
       </div>
     </section>
   );
