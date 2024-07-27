@@ -42,7 +42,7 @@ const Contact: React.FC = () => {
           animate={isInView2 ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          Get In Touch
+          Let's Work Together!
         </motion.h2>
         <motion.p
           ref={ref4}
