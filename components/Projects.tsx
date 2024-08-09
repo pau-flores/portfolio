@@ -51,7 +51,7 @@ const Projects: React.FC = () => {
     {
       title: "The Incredible Journey",
       description:
-        "Lost in a campsite, this is a single player, procedurally generated adventure game where you must find your way back home. Built with C# and Unity. Four person developer team.",
+        "A single player, procedurally generated adventure game where you must find your way back home, after getting lost in campsite. Built with C# and Unity. Four person developer team.",
     },
   ];
 
