@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, useInView } from "framer-motion";
 import { FaBriefcase, FaGraduationCap } from "react-icons/fa";
+import { Timeline as PrimeTimeline } from "primereact/timeline";
 
 interface TimelineItemProps {
   title: string;
@@ -8,58 +9,47 @@ interface TimelineItemProps {
   location: string;
   description: string;
   icon: "work" | "education";
+  isLeft?: boolean;
 }
 
-const TimelineItem: React.FC<TimelineItemProps> = ({
+const customTimelineIcon = (item: TimelineItemProps) => {
+  return (
+    <span className="flex w-2rem h-2rem align-items-center justify-content-center text-white border-circle z-1 shadow-1 mx-4 bg-sky-500 rounded-full p-3">
+      {item.icon === "work" ? (
+        <FaBriefcase className="text-2xl text-white" />
+      ) : (
+        <FaGraduationCap className="text-2xl text-white" />
+      )}
+    </span>
+  );
+};
+
+const customTimelineItem: React.FC<TimelineItemProps> = ({
   title,
   date,
   location,
   description,
-  icon,
 }) => {
   return (
     <motion.div
-      className="flex mb-8 relative"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       viewport={{ once: true, amount: 0.3 }}
+      className="p-6 my-2 bg-gray-700 bg-opacity-30 bg-blend-overlay rounded-md"
     >
-      <div className="flex-1 pr-8 text-right">
-        <h3 className="font-bold text-lg">{title}</h3>
-        <p className="text-sm text-gray-400">{date}</p>
+      <div className="mb-3">
+        <h2 className="text-2xl font-bold mb-1">{title}</h2>
+        <p>
+          <span className="font-bold text-gray-200 mr-2">{location}</span>
+          {date && <span className="mr-2">&#x2022;</span>}
+          <span className="text-gray-400">{date}</span>
+        </p>
       </div>
-      <div className="w-20 flex justify-center">
-        <div className="w-12 h-12 rounded-full bg-sky-500 flex items-center justify-center relative z-10">
-          {icon === "work" ? (
-            <FaBriefcase className="text-2xl text-white" />
-          ) : (
-            <FaGraduationCap className="text-2xl text-white" />
-          )}
-        </div>
-      </div>
-      <div className="flex-1 pl-8">
-        <p className="text-gray-200 font-bold">{location}</p>
-        <p className="text-gray-200">{description}</p>
-      </div>
+      <div className="text-gray-200">{description}</div>
     </motion.div>
   );
 };
-
-const Timeline: React.FC<{ title: string; items: TimelineItemProps[] }> = ({
-  title,
-  items,
-}) => (
-  <div className="mb-20">
-    <h3 className="text-4xl font-bold mb-12 text-center">{title}</h3>
-    <div className="relative">
-      {items.map((item, index) => (
-        <TimelineItem key={index} {...item} />
-      ))}
-      <div className="absolute h-full w-0.5 bg-sky-500 left-1/2 transform -translate-x-1/2 top-0 z-0" />
-    </div>
-  </div>
-);
 
 const Experience: React.FC = () => {
   const workExperiences = [
@@ -82,7 +72,7 @@ const Experience: React.FC = () => {
     {
       title: "Full-Stack Web Developer",
       date: "2015 - Present",
-      location: "iwebcontent",
+      location: "iwebcontent (contractor)",
       description:
         "Collaborated with a cross-functional team to deliver high-quality web solutions.",
       icon: "work" as const,
@@ -111,7 +101,7 @@ const Experience: React.FC = () => {
       date: "",
       location: "City University of Seattle, USA",
       description:
-        "Focused on organizational skills, leadership, and communication.",
+        "Focused on organizational skills, leadership, marketing and communication.",
       icon: "education" as const,
     },
   ];
@@ -131,12 +121,46 @@ const Experience: React.FC = () => {
         >
           Resume
         </motion.h3>
-        <Timeline title="Work Experience" items={workExperiences} />
-        <Timeline title="Education" items={educationExperiences} />
+
+        <motion.h2
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="text-4xl font-bold mb-12 text-center"
+        >
+          Work Experience
+        </motion.h2>
+
+        <PrimeTimeline
+          value={workExperiences}
+          align="alternate"
+          className="customized-timeline mb-20"
+          marker={customTimelineIcon}
+          content={customTimelineItem}
+        />
+
+        <motion.h2
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="text-4xl font-bold mb-12 text-center"
+        >
+          Education
+        </motion.h2>
+
+        <PrimeTimeline
+          value={educationExperiences}
+          align="alternate"
+          className="customized-timeline"
+          marker={customTimelineIcon}
+          content={customTimelineItem}
+        />
       </div>
 
       <div className="absolute inset-0 z-0 flex items-end justify-center">
-        <div className="absolute h-[800px] w-full before:absolute before:h-[700px] before:w-full before:rounded-full before:bg-gradient-radial before:from-purple-600 before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:bg-gradient-conic after:from-sky-900 after:via-purple-800 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-purple-700 before:dark:opacity-10 after:dark:opacity-40 sm:before:w-[780px] sm:after:w-[340px] before:lg:h-[560px]"></div>
+        <div className="absolute h-[1000px] w-full before:absolute before:h-[600px] before:w-full before:rounded-full before:bg-gradient-radial before:from-purple-600 before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:bg-gradient-conic after:from-sky-900 after:via-purple-800 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-purple-700 before:dark:opacity-10 after:dark:opacity-40 sm:before:w-[780px] sm:after:w-[340px] before:lg:h-[560px]"></div>
       </div>
     </section>
   );
