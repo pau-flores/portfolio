@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import { PrimeReactProvider } from "primereact/api";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "primereact/resources/primereact.css";
+import "primereact/resources/themes/lara-dark-cyan/theme.css";
 
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 
@@ -17,9 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <GoogleAnalytics />
-      <body className={inter.className}>{children}</body>
-    </html>
+    <PrimeReactProvider>
+      <html lang="en">
+        <GoogleAnalytics />
+        <body className={inter.className}>{children}</body>
+      </html>
+    </PrimeReactProvider>
   );
 }
